@@ -4,7 +4,7 @@ from .services.scraper import scrape_signals
 from .services.gemini_llm import get_deal_memo, get_outreach_email, get_fit_score
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from schemas import ScrapeRequest, ScrapeResult, GenerateSingleRequest
+from .schemas import ScrapeRequest, ScrapeResult, GenerateSingleRequest
 
 app = FastAPI()
 
