@@ -1,8 +1,11 @@
 [phases.setup]
-nixPkgs = ["python311", "pip"]
+nixPkgs = ["python311"]
 
 [phases.install]
-cmds = ["pip install -r dealflow_assistant/requirements.txt"]
+cmds = [
+  "python3 -m pip install --upgrade pip",
+  "python3 -m pip install -r dealflow_assistant/requirements.txt"
+]
 
 [phases.start]
 cmd = "uvicorn dealflow_assistant.main:app --host 0.0.0.0 --port $PORT"
