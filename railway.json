@@ -1,7 +1,7 @@
 {
     "build": {
         "builder": "NIXPACKS",
-        "buildCommand": "pip install -r dealflow_assistant/requirements.txt",
+        "buildCommand": "python -m pip install -r dealflow_assistant/requirements.txt",
         "startCommand": "uvicorn dealflow_assistant.main:app --host 0.0.0.0 --port $PORT"
     }
 }
