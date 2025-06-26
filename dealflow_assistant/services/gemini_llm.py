@@ -1,8 +1,10 @@
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
+from pathlib import Path
 
-load_dotenv()
+dotenv_path = Path(__file__).resolve().parents[2] / ".env"
+load_dotenv(dotenv_path)
 
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 
