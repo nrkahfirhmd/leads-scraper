@@ -1,25 +1,32 @@
 FROM python:3.11-slim
-WORKDIR /app
-COPY . .
-RUN pip install --upgrade pip
-RUN pip install -r dealflow_assistant/requirements.txt
+
 RUN apt-get update && apt-get install -y \
+    chromium \
     chromium-driver \
-    chromium-browser \
-    fonts-liberation \
-    libappindicator3-1 \
-    libasound2 \
-    libatk-bridge2.0-0 \
-    libatk1.0-0 \
-    libcups2 \
-    libdbus-1-3 \
-    libgdk-pixbuf2.0-0 \
-    libnspr4 \
+    wget \
+    curl \
+    unzip \
+    gnupg \
+    libglib2.0-0 \
     libnss3 \
-    libx11-xcb1 \
+    libgconf-2-4 \
+    libfontconfig1 \
+    libx11-6 \
     libxcomposite1 \
     libxdamage1 \
     libxrandr2 \
-    xdg-utils \
-    --no-install-recommends
-CMD ["uvicorn", "dealflow_assistant.main:app", "--host", "0.0.0.0", "--port", "8000"]   
+    libgbm-dev \
+    libgtk-3-0 \
+    libasound2 \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV CHROME_BIN=/usr/bin/chromium
+ENV CHROMEDRIVER_BIN=/usr/bin/chromedriver
+
+WORKDIR /app
+
+COPY . /app
+
+RUN pip install --no-cache-dir -r dealflow_assistant/requirements.txt
+
+CMD ["uvicorn", "dealflow_assistant.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -3,6 +3,7 @@ from typing import List
 from .services.scraper import scrape_signals
 from .services.gemini_llm import get_deal_memo, get_outreach_email, get_fit_score
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from .schemas import ScrapeRequest, ScrapeResult, GenerateSingleRequest
 
@@ -16,6 +17,9 @@ def scrape(request: ScrapeRequest):
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.binary_location = "/usr/bin/chromium"
+
+    service = Service("/usr/bin/chromedriver")
     driver = webdriver.Chrome(options=options)
     
     results = []
