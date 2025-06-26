@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List, Optional, Union
 
 class NeglectSignals(BaseModel):
-    footer_year: Optional[str]
+    footer_year: Optional[int]
     last_blog_post: Optional[str]
     
 class ScrapeResult(BaseModel):
