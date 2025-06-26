@@ -1,13 +1,11 @@
-FROM python:3.11
 
-RUN apt-get update && apt-get install -y chromium-driver chromium
-
-ENV DISPLAY=:99
+FROM python:3.11-slim
 
 WORKDIR /app
 
 COPY . .
 
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r dealflow_assistant/requirements.txt
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "dealflow_assistant.main:app", "--host", "0.0.0.0", "--port", "8000"]
